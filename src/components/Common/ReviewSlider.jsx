@@ -7,11 +7,13 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
+import "swiper/css/autoplay"
 import "../../App.css"
 // Icons
 import { FaStar } from "react-icons/fa"
 // Import required modules
 import { Autoplay, FreeMode, Pagination } from "swiper"
+
 
 // Get apiFunction and the endpoint
 import { apiConnector } from "../../services/apiConnector"
@@ -39,7 +41,7 @@ function ReviewSlider() {
     <div className="text-white">
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={3}
           spaceBetween={25}
           loop={true}
           freeMode={true}
@@ -48,6 +50,11 @@ function ReviewSlider() {
             disableOnInteraction: false,
           }}
           modules={[FreeMode, Pagination, Autoplay]}
+          breakpoints={{
+            1024 : {
+              slidesPerView : 4,
+            },
+          }}
           className="w-full "
         >
           {reviews.map((review, i) => {
@@ -97,7 +104,7 @@ function ReviewSlider() {
               </SwiperSlide>
             )
           })}
-          {/* <SwiperSlide>Slide 1</SwiperSlide> */}
+
         </Swiper>
       </div>
     </div>

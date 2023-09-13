@@ -2,6 +2,7 @@ const User = require("../models/User")
 const mailSender = require("../utils/mailSender")
 const bcrypt = require("bcrypt")
 const crypto = require("crypto")
+const emailTemplate = require("../mail/templates/emailVerificationTemplate");
 exports.resetPasswordToken = async (req, res) => {
   try {
     const email = req.body.email
@@ -24,14 +25,20 @@ exports.resetPasswordToken = async (req, res) => {
     )
     console.log("DETAILS", updatedDetails)
 
-    // const url = `http://localhost:3000/update-password/${token}`
-    const url = `https://studynotion-edtech-project.vercel.app/update-password/${token}`
+    const url = `http://localhost:3000/update-password/${token}`
+    // const url = `https://candid-banoffee-5760d5.netlify.app//update-password/${token}`
 
-    await mailSender(
-      email,
-      "Password Reset",
-      `Your Link for email verification is ${url}. Please click this url to reset your password.`
-    )
+
+  
+      const mailResponse=  await mailSender(
+        email,
+        "Password Reset",
+        `Your Link for email verification is ${url}. Please click this url to reset your password.`
+      )
+      console.log("Email sent successfully: ", mailResponse.response);
+    
+
+    
 
     res.json({
       success: true,
