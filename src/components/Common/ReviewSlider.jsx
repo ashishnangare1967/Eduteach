@@ -13,7 +13,10 @@ import "../../App.css"
 import { FaStar } from "react-icons/fa"
 // Import required modules
 import { Autoplay, FreeMode, Pagination } from "swiper"
-
+// import { Autoplay } from "swiper/types/modules/autoplay"
+// import { FreeMode } from "swiper/types/modules/free-mode"
+// import { Pagination } from "swiper/types/modules/pagination"
+// import {Swiper, default} from "swiper"
 
 // Get apiFunction and the endpoint
 import { apiConnector } from "../../services/apiConnector"
@@ -104,7 +107,7 @@ function ReviewSlider() {
               </SwiperSlide>
             )
           })}
-
+          {/* <SwiperSlide>Slide 1</SwiperSlide> */}
         </Swiper>
       </div>
     </div>
