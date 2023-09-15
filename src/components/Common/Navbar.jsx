@@ -11,6 +11,9 @@ import { categories } from "../../services/apis"
 import { ACCOUNT_TYPE } from "../../utils/constants"
 import ProfileDropdown from "../core/Auth/ProfileDropdown"
 
+import SmallScreenNavbar from "./SmallScreenNavbar"
+import { ImCross } from "react-icons/im"
+
 // const subLinks = [
 //   {
 //     title: "Python",
@@ -35,12 +38,13 @@ function Navbar() {
   const { user } = useSelector((state) => state.profile)
   const { totalItems } = useSelector((state) => state.cart)
   const location = useLocation()
+  const [isClose, setIsClose] = useState(false);
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
@@ -56,6 +60,10 @@ function Navbar() {
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
+  }
+
+  let handleCrossButton = () => { 
+     isClose ? setIsClose(false) : setIsClose(true);  
   }
 
   return (
@@ -159,9 +167,26 @@ function Navbar() {
           )}
           {token !== null && <ProfileDropdown />}
         </div>
-        <button className="mr-4 md:hidden">
-          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
-        </button>
+        {
+        isClose === false ? (
+          <button className="mr-4 md:hidden"
+            onClick={handleCrossButton}>
+            <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+          </button>
+        ) :
+        (
+          <button className="mr-4 md:hidden"
+          onClick={handleCrossButton}>
+            <ImCross fontSize={24} fill="#AFB2BF" />
+          </button>
+        )
+      }
+      {
+        isClose && <SmallScreenNavbar 
+                      isClose={isClose}
+                      // setIsClose={setIsClose}
+                      handleCrossButton={handleCrossButton} />
+      }
       </div>
     </div>
   )
