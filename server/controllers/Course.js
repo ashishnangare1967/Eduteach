@@ -89,7 +89,7 @@ exports.createCourse = async (req, res) => {
       category: categoryDetails._id,
       thumbnail: thumbnailImage.secure_url,
       status: status,
-      instructions,
+      instructions
     })
 
     // Add the new course to the User Schema of the Instructor
