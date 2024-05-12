@@ -77,7 +77,7 @@ exports.createCourse = async (req, res) => {
       thumbnail,
       process.env.FOLDER_NAME
     )
-    console.log(thumbnailImage)
+   
     // Create a new course with the given details
     const newCourse = await Course.create({
       courseName,
@@ -114,7 +114,6 @@ exports.createCourse = async (req, res) => {
       },
       { new: true }
     )
-    console.log("HEREEEEEEEE", categoryDetails2)
     // Return the new course and a success message
     res.status(200).json({
       success: true,
@@ -369,9 +368,7 @@ exports.getFullCourseDetails = async (req, res) => {
       courseID: courseId,
       userId: userId,
     })
-
-    console.log("courseProgressCount : ", courseProgressCount)
-
+    
     if (!courseDetails) {
       return res.status(400).json({
         success: false,

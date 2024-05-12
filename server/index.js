@@ -34,7 +34,7 @@ app.use(
 	fileUpload({
 		useTempFiles: true,
 		tempFileDir: "/tmp/",
-	})
+	})	
 );
 
 // Connecting to cloudinary
